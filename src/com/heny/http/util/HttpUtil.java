@@ -42,7 +42,8 @@ public class HttpUtil {
      * @param header 消息头（可以为null）
      * @return
      */
-    public static HttpResEntity sendGet(String url, Map<String, String> paramMap, Map<String, String> header) {
+    public static HttpResEntity sendGet(String url, Map<String, String> paramMap,
+            Map<String, String> header) {
 
         HttpResEntity resEntity = new HttpResEntity();
         resEntity.setResCode(404); // 默认返回404错误
@@ -77,7 +78,8 @@ public class HttpUtil {
         return resEntity;
     }
 
-    public static HttpResEntity sendGetByProxy(String url, Map<String, String> paramMap, Map<String, String> header) {
+    public static HttpResEntity sendGetByProxy(String url, Map<String, String> paramMap,
+            Map<String, String> header) {
 
         RequestBean bean = new RequestBean();
         bean.setUrl(url);
@@ -130,7 +132,8 @@ public class HttpUtil {
         return resEntity;
     }
 
-    public static HttpResEntity sendPostJsonByProxy(String url, String param, Map<String, String> header) {
+    public static HttpResEntity sendPostJsonByProxy(String url, String param,
+            Map<String, String> header) {
 
         RequestBean bean = new RequestBean();
         bean.setUrl(url);
@@ -138,7 +141,7 @@ public class HttpUtil {
         bean.setHeader(header);
         if (url.startsWith("https://")) {
             return sendPostJson(URL + "/https/post", JSON.toJSONString(bean), null);
-        }else {
+        } else {
             return sendPostJson(URL + "/http/post", JSON.toJSONString(bean), null);
         }
     }
@@ -149,7 +152,8 @@ public class HttpUtil {
      * @param param 请求数据
      * @param charset 编码方式
      */
-    public static HttpResEntity sendPost(String url, Map<String, String> param, Map<String, String> header) {
+    public static HttpResEntity sendPost(String url, Map<String, String> param,
+            Map<String, String> header) {
 
         HttpResEntity resEntity = new HttpResEntity();
         resEntity.setResCode(404); // 默认返回404错误
@@ -171,7 +175,8 @@ public class HttpUtil {
             if (null != param && !param.isEmpty()) {
                 List<NameValuePair> list = new ArrayList<>();
                 for (Map.Entry<String, String> entry : param.entrySet()) {
-                    NameValuePair valuePair = new BasicNameValuePair(entry.getKey(), entry.getValue());
+                    NameValuePair valuePair =
+                            new BasicNameValuePair(entry.getKey(), entry.getValue());
                     list.add(valuePair);
                 }
                 if (!list.isEmpty()) {
@@ -191,14 +196,15 @@ public class HttpUtil {
         return resEntity;
     }
 
-    public static HttpResEntity sendPostByProxy(String url, Map<String, String> param, Map<String, String> header) {
+    public static HttpResEntity sendPostByProxy(String url, Map<String, String> param,
+            Map<String, String> header) {
         RequestBean bean = new RequestBean();
         bean.setUrl(url);
         bean.setParams(param);
         bean.setHeader(header);
         if (url.startsWith("https://")) {
             return sendPostJson(URL + "/https/post", JSON.toJSONString(bean), null);
-        }else {
+        } else {
             return sendPostJson(URL + "/http/post", JSON.toJSONString(bean), null);
         }
     }
@@ -210,7 +216,8 @@ public class HttpUtil {
      * @throws ParseException
      * @throws IOException
      */
-    private static HttpResEntity getResult(CloseableHttpResponse response) throws ParseException, IOException {
+    private static HttpResEntity getResult(CloseableHttpResponse response)
+            throws ParseException, IOException {
         HttpResEntity resEntity = new HttpResEntity();
         if (response != null) {
             resEntity.setResCode(response.getStatusLine().getStatusCode());
